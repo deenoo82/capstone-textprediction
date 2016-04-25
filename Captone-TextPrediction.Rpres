@@ -1,0 +1,66 @@
+Captone Project - TextPrediction
+========================================================
+author: Alex
+date: 04/24/2016
+autosize: true
+
+Introduction
+========================================================
+
+The goal of this application is to predict the next word based on the user input.  The underlying model uses ngram model. 
+
+The model tokenize the SwiftKey data from news, blog, and twitter into 
+- Unigram
+- Bigrams
+- Trigrams
+
+N-Gram Model
+========================================================
+
+The basic probably of the next word is defined as 
+
+P(A,B) = p(A|B) p(B)
+
+In other words, how likely is word X to follow by word y?
+For exmaple, P(you|I love) = P(I love you) | P(I love)
+
+In addition, the model also uses chain-rule for calculating probabilities of an given sentence.  This is calcualted leveage chain-rule where it states
+
+P(A1, A2, ..., An) = P(A1| A2, ..., An) P(A2| A3, ..., An) P(An-1|An) P(An)
+
+How the App Model Work
+========================================================
+This application works as below
+
+Model
+- Calculate prediction matrix for uni-grams, bi-grams, and tri-grams
+- the resulting matrix has columns of word, key, nextwork, and prob
+```{r, echo=FALSE}
+load('predictMatrix.rda')
+head(predictMatrix)
+```
+- Find all possible next word based on last two words or last one word of user input
+- Tokenize the user input into tri-grams, and join with the prediction matrix
+- Calculate the sentence probabilities for all possible sentences
+- Return the work with the best probability
+
+Performance and Accuracy
+========================================================
+*Performance*
+
+Since the model is a data frame table which is stored in the memory.  The intitial run the application may take a second.  However, subsequent query should return result quickly
+
+*Accuracy*
+
+Given the course quiz I was able to achieve 80% and 90% accuracy with the app.  Spot checking the app accuracy, it provide a good next word that makes sense even if it does not completely match with the actual results.
+
+App Usage
+========================================================
+![App Interface](AppInterfact.png)
+***
+To use the application, follow the steps below
+
+1. Type/paste text into the text box on the left
+2. Hit submit button
+3. The main panel will return both user input and the next word prediction
+
