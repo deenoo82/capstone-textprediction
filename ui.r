@@ -13,6 +13,7 @@ shinyUI(
   mainPanel(
     p('This app uses n-gram model to try and predict the next word based on user input'),
     p('Please input text into the text input and hit submit button'),
+    p('Initial query will take longer due to loading dataset into memory, subsequent query will be much faster'),
     h3('Results of Suggestion'),
     h4('You have entered'),
     verbatimTextOutput("inputValue"),

@@ -794,27 +794,13 @@ For exmaple, P(you|I love) = P(I love you) | P(I love)</p>
 <div class="slideContent" >
 <p>This application works as below</p>
 
-<p>Model</p>
-
 <ul>
 <li>Calculate prediction matrix for uni-grams, bi-grams, and tri-grams</li>
 <li>the resulting matrix has columns of word, key, nextwork, and prob</li>
-</ul>
-
-<pre><code>                     word          key   nextword prob
-1                 14u_16u          14u        16u  0.7
-2                14u_team          14u       team  0.2
-3                 14u_may          14u        may  0.1
-4 15-character_production 15-character production  0.5
-5   15-character_password 15-character   password  0.5
-6  150-year-old_character 150-year-old  character  0.5
-</code></pre>
-
-<ul>
-<li>Find all possible next word based on last two words or last one word of user input</li>
 <li>Tokenize the user input into tri-grams, and join with the prediction matrix</li>
-<li>Calculate the sentence probabilities for all possible sentences</li>
-<li>Return the work with the best probability</li>
+<li>Find all possible next word based on last two words or last one word of user input</li>
+<li>Calculate the probabilities for all possible sentences</li>
+<li>Return the work with the best probability or a word from prediction matrix if no bi-gram or tri-gram matches is found</li>
 </ul>
 
 </div>

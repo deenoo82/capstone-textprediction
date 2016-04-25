@@ -31,18 +31,12 @@ P(A1, A2, ..., An) = P(A1| A2, ..., An) P(A2| A3, ..., An) P(An-1|An) P(An)
 How the App Model Work
 ========================================================
 This application works as below
-
-Model
 - Calculate prediction matrix for uni-grams, bi-grams, and tri-grams
 - the resulting matrix has columns of word, key, nextwork, and prob
-```{r, echo=FALSE}
-load('predictMatrix.rda')
-head(predictMatrix)
-```
-- Find all possible next word based on last two words or last one word of user input
 - Tokenize the user input into tri-grams, and join with the prediction matrix
-- Calculate the sentence probabilities for all possible sentences
-- Return the work with the best probability
+- Find all possible next word based on last two words or last one word of user input
+- Calculate the probabilities for all possible sentences
+- Return the work with the best probability or a word from prediction matrix if no bi-gram or tri-gram matches is found
 
 Performance and Accuracy
 ========================================================

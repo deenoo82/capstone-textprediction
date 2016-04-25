@@ -9,7 +9,7 @@ predictNextword <- function(input) {
                   removePunct=TRUE, removeSeparators=TRUE, 
                   removeTwitter=FALSE, ngrams=3L)
   tokens <- tolower(tokens)
-  size <- length(unlist(tokens))
+  size <- length(tokens)
   lasttoken <- tokens[[1]][size]
   last2word <- paste(unlist(strsplit(lasttoken,'_'))[2:3],collapse = "_")
   lastword <- unlist(strsplit(lasttoken,'_'))[2]
@@ -26,12 +26,12 @@ predictNextword <- function(input) {
   }
   # check for the new prediction table
   if (nrow(prediction) == 0) {
-    ng <- ngram(input, n=1)
-    return (babble(ng,1))
+    rand.int <- sample(1:nrow(predictMatrix), 1)
+    return(predictMatrix[rand.int,3])
   }
   prediction$nextwordProb <- prediction$prob * sumprod
   prediction <- prediction[order(-prediction[,5]),]
-  return (prediction[1,3])
+  return (prediction[1,c("nextword")])
 }
 
 shinyServer(
